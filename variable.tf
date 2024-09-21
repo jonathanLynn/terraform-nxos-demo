@@ -330,3 +330,31 @@ variable "ipv4_interface_addresses" {
     # Add more interface-to-IP mappings as needed
   ]
 }
+
+#Bridge Domains
+variable "bridge_domains" {
+  type = list(object({
+    fabric_encap = string
+    access_encap = string
+    name         = string
+  }))
+
+  default = [
+    {
+      fabric_encap = "vlan-501"
+      access_encap = "unknown"
+      name         = "VLAN501"
+    },
+    {
+      fabric_encap = "vlan-502"
+      access_encap = "unknown"
+      name         = "VLAN502"
+    },
+    {
+      fabric_encap = "vlan-503"
+      access_encap = "unknown"
+      name         = "VLAN503"
+    },
+    # Add more bridge domains as needed
+  ]
+}

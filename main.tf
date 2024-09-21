@@ -68,19 +68,11 @@ provider "nxos" {
       address      = each.value.address
     }
 
-
-#Create Vlan500
-    resource "nxos_bridge_domain" "VLAN500" {
-    fabric_encap = "vlan-500"
-    access_encap = "unknown"
-    name         = "VLAN500"
-}
-
-#Create Vlan501
-    resource "nxos_bridge_domain" "VLAN501" {
-    fabric_encap = "vlan-501"
-    access_encap = "unknown"
-    name         = "VLAN501"
+resource "nxos_bridge_domain" "bridge_domain" {
+  for_each = { for bd in var.bridge_domains : bd.name => bd }
+  fabric_encap = each.value.fabric_encap
+  access_encap = each.value.access_encap
+  name         = each.value.name
 }
 
 resource "nxos_physical_interface" "Interface_Eth1_15" {
