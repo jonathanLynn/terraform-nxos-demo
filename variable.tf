@@ -1,3 +1,36 @@
+#VRF Variables
+variable "vrfs" {
+  type = list(object({
+    name = string
+  }))
+
+  default = [
+    {
+      name = "VRF1"
+    },
+    # Add more VRFs as needed
+  ]
+}
+
+#Create the VRFs
+variable "define-vrfs" {
+  type = list(object({
+    name = string
+    description = string
+    encap = string
+  }))
+
+  default = [
+    {
+      name        = "VRF1"
+      description = "My VRF1 Description"
+      encap       = "unknown"
+    },
+    # Add more VRFs as needed
+  ]
+}
+
+
 #Static Routes for VRF1
 variable "static_routes" {
   type = list(object({

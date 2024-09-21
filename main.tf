@@ -15,16 +15,35 @@ provider "nxos" {
 
 
 #This Builds out the IPv4 VRF Tenant ready for all L3 Interfaces
+    
+    /*
     resource "nxos_ipv4_vrf" "VRF1" {
     name = "VRF1"
     }
+    */
     
+    resource "nxos_ipv4_vrf" "vrf" {
+      for_each = { for vrf in var.vrfs : vrf.name => vrf }
+
+      name = each.value.name
+    }
+
+    /*
     resource "nxos_vrf" "VRF1" {
     name        = "VRF1"
     description = "My VRF1 Description"
     encap       = "unknown"
 
     depends_on = [nxos_ipv4_vrf.VRF1]
+    }
+    */
+
+    resource "nxos_vrf" "VRF1" {
+      for_each = { for vrf in var.define-vrfs : vrf.name => vrf }
+
+      name        = each.value.name
+      description = each.value.description
+      encap       = each.value.encap
     }
 
 
