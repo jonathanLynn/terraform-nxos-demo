@@ -239,7 +239,7 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_17" {
   #force        = false
 }
 
-#TESTING FOR LOOPS
+#Static Routing
 resource "nxos_ipv4_static_route" "StaticRoute-ForLoops" {
   for_each = { for route in var.static_routes : route.prefix => route }
 
