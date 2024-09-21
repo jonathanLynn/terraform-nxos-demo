@@ -230,6 +230,13 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_16" {
   #force        = false
 }
 
+#Add Interface to Port-Channel
+resource "nxos_port_channel_interface_member" "Po1_Eth1_17" {
+  interface_id = "po1"
+  interface_dn = "sys/intf/phys-[eth1/17]"
+  #force        = false
+}
+
 #Add Static Route
     resource "nxos_ipv4_static_route" "StaticRoute1" {
     vrf_name = "VRF1"
@@ -245,17 +252,17 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_16" {
     }]
     }
 
-resource "nxos_ipv4_static_route" "StaticRoute2" {
-  vrf_name = var.vrf_name
-  prefix   = var.route_prefix
+resource "nxos_ipv4_static_route" "example" {
+  vrf_name = "VRF1"
+  prefix   = "1.1.1.0/24"
   next_hops = [{
     interface_id = "unspecified"
-    address      = var.next_hop_address
-    vrf_name     = var.vrf_name
-    description  = var.next_hop_description
-    object       = var.object
-    preference   = var.preference
-    tag          = var.tag
+    address      = "10.100.1.1"
+    vrf_name     = "VRF1"
+    description  = "My Description"
+    object       = 10
+    preference   = 123
+    tag          = 10
   }]
 }
 
