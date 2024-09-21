@@ -83,7 +83,7 @@ resource "nxos_physical_interface" "Interface_Eth1_15" {
   auto_negotiation         = "on"
   #bandwidth                = 1000
   #delay                    = 10
-  description              = "My Description"
+  description              = "My Description-1"
   duplex                   = "auto"
   layer                    = "Layer2"
   link_logging             = "enable"
