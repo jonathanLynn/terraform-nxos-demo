@@ -125,6 +125,31 @@ resource "nxos_physical_interface" "Interface_Eth1_16" {
   user_configured_flags    = "admin_layer,admin_mtu,admin_state"
 }
 
+resource "nxos_physical_interface" "Interface_Eth1_17" {
+  interface_id             = "eth1/17"
+  fec_mode                 = "auto"
+  access_vlan              = "unknown"
+  admin_state              = "up"
+  auto_negotiation         = "on"
+  #bandwidth                = 1000
+  #delay                    = 10
+  description              = "My Description-2"
+  duplex                   = "auto"
+  layer                    = "Layer2"
+  link_logging             = "enable"
+  #link_debounce_down       = 200
+  #link_debounce_up         = 0
+  medium                   = "broadcast"
+  mode                     = "trunk"
+  mtu                      = 1500
+  #native_vlan              = "1"
+  speed                    = "auto"
+  speed_group              = "auto"
+  trunk_vlans              = "500-501,503-505"
+  #uni_directional_ethernet = "disable"
+  user_configured_flags    = "admin_layer,admin_mtu,admin_state"
+}
+
 #Create a Port-Channel
     resource "nxos_port_channel_interface" "Port-Channel1" {
     interface_id          = "po1"
