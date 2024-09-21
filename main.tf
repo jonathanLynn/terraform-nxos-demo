@@ -29,34 +29,28 @@ provider "nxos" {
 
 
 #Interface Configuration
-    resource "nxos_svi_interface" "vlan300" {
-    interface_id = "vlan300"
+    resource "nxos_svi_interface" "vlan400" {
+    interface_id = "vlan400"
     admin_state  = "up"
     description  = "My Description"
     }
 
-
-
 #Interface to VRF Mapping
-    resource "nxos_svi_interface_vrf" "vlan300" {
-    interface_id = "vlan300"
+    resource "nxos_svi_interface_vrf" "vlan400" {
+    interface_id = "vlan400"
     vrf_dn       = "sys/inst-VRF1"
     }
 
-
-
 #Interface IPv4 Configuration
-    resource "nxos_ipv4_interface" "vlan300" {
+    resource "nxos_ipv4_interface" "vlan400" {
     vrf          = "VRF1"
-    interface_id = "vlan300"
+    interface_id = "vlan400"
     }
 
-
-    resource "nxos_ipv4_interface_address" "vlan300" {
+    resource "nxos_ipv4_interface_address" "vlan400" {
     vrf          = "VRF1"
-    interface_id = "vlan300"
+    interface_id = "vlan400"
     address      = "10.100.11.1/24"
-    #type         = "primary"
     }
 
 
