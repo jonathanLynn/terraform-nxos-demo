@@ -1,3 +1,4 @@
+#Static Routes for VRF1
 variable "static_routes" {
   type = list(object({
     vrf_name     = string
@@ -40,3 +41,157 @@ variable "static_routes" {
   ]
 }
 
+#SVI Interfaces
+variable "svi_interfaces" {
+  type = list(object({
+    interface_id = string
+    admin_state  = string
+    description  = string
+  }))
+
+  default = [
+    {
+      interface_id = "vlan400"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    {
+      interface_id = "vlan401"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    {
+      interface_id = "vlan402"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    {
+      interface_id = "vlan403"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    {
+      interface_id = "vlan404"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    {
+      interface_id = "vlan405"
+      admin_state  = "up"
+      description  = "My Description"
+    },
+    # Add more VLAN interfaces as needed
+  ]
+}
+
+variable "svi_interface_vrfs" {
+  type = list(object({
+    interface_id = string
+    vrf_dn       = string
+  }))
+
+  default = [
+    {
+      interface_id = "vlan400"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    {
+      interface_id = "vlan401"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    {
+      interface_id = "vlan402"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    {
+      interface_id = "vlan403"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    {
+      interface_id = "vlan404"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    {
+      interface_id = "vlan405"
+      vrf_dn       = "sys/inst-VRF1"
+    },
+    # Add more interface-to-VRF mappings as needed
+  ]
+}
+
+variable "ipv4_interfaces" {
+  type = list(object({
+    interface_id = string
+    vrf          = string
+  }))
+
+  default = [
+    {
+      interface_id = "vlan400"
+      vrf          = "VRF1"
+    },
+    {
+      interface_id = "vlan401"
+      vrf          = "VRF1"
+    },
+    {
+      interface_id = "vlan402"
+      vrf          = "VRF1"
+    },
+    {
+      interface_id = "vlan403"
+      vrf          = "VRF1"
+    },
+    {
+      interface_id = "vlan404"
+      vrf          = "VRF1"
+    },
+    {
+      interface_id = "vlan405"
+      vrf          = "VRF1"
+    },
+    # Add more interface-to-VRF mappings as needed
+  ]
+}
+
+variable "ipv4_interface_addresses" {
+  type = list(object({
+    interface_id = string
+    vrf          = string
+    address      = string
+  }))
+
+  default = [
+    {
+      interface_id = "vlan400"
+      vrf          = "VRF1"
+      address      = "10.100.11.1/24"
+    },
+    {
+      interface_id = "vlan401"
+      vrf          = "VRF1"
+      address      = "10.100.12.1/24"
+    },
+    {
+      interface_id = "vlan402"
+      vrf          = "VRF1"
+      address      = "10.100.13.1/24"
+    },
+    {
+      interface_id = "vlan403"
+      vrf          = "VRF1"
+      address      = "10.100.14.1/24"
+    },
+    {
+      interface_id = "vlan404"
+      vrf          = "VRF1"
+      address      = "10.100.15.1/24"
+    },
+    {
+      interface_id = "vlan405"
+      vrf          = "VRF1"
+      address      = "10.100.16.1/24"
+    },
+    # Add more interface-to-IP mappings as needed
+  ]
+}

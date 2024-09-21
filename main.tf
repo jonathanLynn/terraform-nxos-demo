@@ -29,29 +29,69 @@ provider "nxos" {
 
 
 #Interface Configuration
+
+    /*
     resource "nxos_svi_interface" "vlan400" {
     interface_id = "vlan400"
     admin_state  = "up"
     description  = "My Description"
     }
+    */
+
+    resource "nxos_svi_interface" "svi" {
+      for_each = { for svi in var.svi_interfaces : svi.interface_id => svi }
+
+      interface_id = each.value.interface_id
+      admin_state  = each.value.admin_state
+      description  = each.value.description
+    }
+
 
 #Interface to VRF Mapping
+    /*
     resource "nxos_svi_interface_vrf" "vlan400" {
     interface_id = "vlan400"
     vrf_dn       = "sys/inst-VRF1"
     }
+    */
+
+    resource "nxos_svi_interface_vrf" "svi_vrf" {
+      for_each = { for svi_vrf in var.svi_interface_vrfs : svi_vrf.interface_id => svi_vrf }
+
+      interface_id = each.value.interface_id
+      vrf_dn       = each.value.vrf_dn
+      }
 
 #Interface IPv4 Configuration
+    /*
     resource "nxos_ipv4_interface" "vlan400" {
     vrf          = "VRF1"
     interface_id = "vlan400"
     }
+    */
 
+    resource "nxos_ipv4_interface" "ipv4_interface" {
+      for_each = { for intf in var.ipv4_interfaces : intf.interface_id => intf }
+
+      vrf          = each.value.vrf
+      interface_id = each.value.interface_id
+    }
+
+    resource "nxos_ipv4_interface_address" "ipv4_interface_address" {
+      for_each = { for addr in var.ipv4_interface_addresses : addr.interface_id => addr }
+
+      vrf          = each.value.vrf
+      interface_id = each.value.interface_id
+      address      = each.value.address
+    }
+
+    /*
     resource "nxos_ipv4_interface_address" "vlan400" {
     vrf          = "VRF1"
     interface_id = "vlan400"
     address      = "10.100.11.1/24"
     }
+    */
 
 
 #Create Vlan500
