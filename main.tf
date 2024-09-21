@@ -258,3 +258,21 @@ resource "nxos_ipv4_static_route" "StaticRoute2" {
     tag          = var.tag
   }]
 }
+
+#TESTING FOR LOOPS
+resource "nxos_ipv4_static_route" "StaticRoute-ForLoops" {
+  for_each = { for route in var.static_routes : route.prefix => route }
+
+  vrf_name = each.value.vrf_name
+  prefix   = each.value.prefix
+
+  next_hops = [{
+    interface_id = each.value.next_hop_interface
+    address      = each.value.next_hop_address
+    vrf_name     = each.value.next_hop_vrf
+    description  = each.value.description
+    object       = each.value.object
+    preference   = each.value.preference
+    tag          = each.value.tag
+  }]
+}
