@@ -32,11 +32,7 @@ provider "nxos" {
     resource "nxos_svi_interface" "vlan300" {
     interface_id = "vlan300"
     admin_state  = "up"
-    bandwidth    = 1000
-    delay        = 10
     description  = "My Description"
-    medium       = "bcast"
-    mtu          = 9216
     }
 
 
@@ -53,10 +49,6 @@ provider "nxos" {
     resource "nxos_ipv4_interface" "vlan300" {
     vrf          = "VRF1"
     interface_id = "vlan300"
-    drop_glean   = "disabled"
-    forward      = "enabled"
-    unnumbered   = "unspecified"
-    urpf         = "disabled"
     }
 
 
@@ -64,8 +56,9 @@ provider "nxos" {
     vrf          = "VRF1"
     interface_id = "vlan300"
     address      = "10.100.11.1/24"
-    type         = "primary"
+    #type         = "primary"
     }
+
 
 #Create Vlan500
     resource "nxos_bridge_domain" "VLAN500" {
@@ -237,35 +230,6 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_17" {
   #force        = false
 }
 
-#Add Static Route
-    resource "nxos_ipv4_static_route" "StaticRoute1" {
-    vrf_name = "VRF1"
-    prefix   = "2.2.2.2/32"
-    next_hops = [{
-        interface_id = "unspecified"
-        address      = "1.2.3.4"
-        vrf_name     = "VRF1"
-        description  = "Route1"
-        object       = 11
-        preference   = 10
-        tag          = 10
-    }]
-    }
-
-resource "nxos_ipv4_static_route" "example" {
-  vrf_name = "VRF1"
-  prefix   = "1.1.1.0/24"
-  next_hops = [{
-    interface_id = "unspecified"
-    address      = "10.100.1.1"
-    vrf_name     = "VRF1"
-    description  = "My Description"
-    object       = 10
-    preference   = 123
-    tag          = 10
-  }]
-}
-
 #TESTING FOR LOOPS
 resource "nxos_ipv4_static_route" "StaticRoute-ForLoops" {
   for_each = { for route in var.static_routes : route.prefix => route }
@@ -277,9 +241,9 @@ resource "nxos_ipv4_static_route" "StaticRoute-ForLoops" {
     interface_id = each.value.next_hop_interface
     address      = each.value.next_hop_address
     vrf_name     = each.value.next_hop_vrf
-    description  = each.value.description
-    object       = each.value.object
-    preference   = each.value.preference
-    tag          = each.value.tag
+    #description  = each.value.description
+    #object       = each.value.object
+    #preference   = each.value.preference
+    #tag          = each.value.tag
   }]
 }
