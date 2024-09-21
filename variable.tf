@@ -61,7 +61,7 @@ variable "static_routes" {
       next_hop_address  = "1.2.3.4"
       next_hop_vrf      = "VRF1"
       description       = "Route3"
-      object            = 10
+      object            = 12
       preference        = 10
       tag               = 10
     },
@@ -72,7 +72,7 @@ variable "static_routes" {
       next_hop_address  = "10.10.10.10"
       next_hop_vrf      = "VRF1"
       description       = "Route4"
-      object            = 10
+      object            = 13
       preference        = 10
       tag               = 10
     },
@@ -83,7 +83,7 @@ variable "static_routes" {
       next_hop_address  = "10.10.10.10"
       next_hop_vrf      = "VRF1"
       description       = "Route5"
-      object            = 10
+      object            = 14
       preference        = 10
       tag               = 10
     },

@@ -239,7 +239,7 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_16" {
         address      = "1.2.3.4"
         vrf_name     = "VRF1"
         description  = "Route1"
-        object       = 10
+        object       = 11
         preference   = 10
         tag          = 10
     }]
