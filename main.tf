@@ -244,3 +244,17 @@ resource "nxos_port_channel_interface_member" "Po1_Eth1_16" {
         tag          = 10
     }]
     }
+
+resource "nxos_ipv4_static_route" "StaticRoute1" {
+  vrf_name = var.vrf_name
+  prefix   = var.route_prefix
+  next_hops = [{
+    interface_id = "unspecified"
+    address      = var.next_hop_address
+    vrf_name     = var.vrf_name
+    description  = var.next_hop_description
+    object       = var.object
+    preference   = var.preference
+    tag          = var.tag
+  }]
+}
