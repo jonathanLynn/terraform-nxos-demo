@@ -16,27 +16,11 @@ provider "nxos" {
 
 #This Builds out the IPv4 VRF Tenant ready for all L3 Interfaces
     
-    /*
-    resource "nxos_ipv4_vrf" "VRF1" {
-    name = "VRF1"
-    }
-    */
-    
     resource "nxos_ipv4_vrf" "vrf" {
       for_each = { for vrf in var.vrfs : vrf.name => vrf }
 
       name = each.value.name
     }
-
-    /*
-    resource "nxos_vrf" "VRF1" {
-    name        = "VRF1"
-    description = "My VRF1 Description"
-    encap       = "unknown"
-
-    depends_on = [nxos_ipv4_vrf.VRF1]
-    }
-    */
 
     resource "nxos_vrf" "VRF1" {
       for_each = { for vrf in var.define-vrfs : vrf.name => vrf }
@@ -49,14 +33,6 @@ provider "nxos" {
 
 #Interface Configuration
 
-    /*
-    resource "nxos_svi_interface" "vlan400" {
-    interface_id = "vlan400"
-    admin_state  = "up"
-    description  = "My Description"
-    }
-    */
-
     resource "nxos_svi_interface" "svi" {
       for_each = { for svi in var.svi_interfaces : svi.interface_id => svi }
 
@@ -67,12 +43,6 @@ provider "nxos" {
 
 
 #Interface to VRF Mapping
-    /*
-    resource "nxos_svi_interface_vrf" "vlan400" {
-    interface_id = "vlan400"
-    vrf_dn       = "sys/inst-VRF1"
-    }
-    */
 
     resource "nxos_svi_interface_vrf" "svi_vrf" {
       for_each = { for svi_vrf in var.svi_interface_vrfs : svi_vrf.interface_id => svi_vrf }
@@ -82,12 +52,6 @@ provider "nxos" {
       }
 
 #Interface IPv4 Configuration
-    /*
-    resource "nxos_ipv4_interface" "vlan400" {
-    vrf          = "VRF1"
-    interface_id = "vlan400"
-    }
-    */
 
     resource "nxos_ipv4_interface" "ipv4_interface" {
       for_each = { for intf in var.ipv4_interfaces : intf.interface_id => intf }
@@ -103,14 +67,6 @@ provider "nxos" {
       interface_id = each.value.interface_id
       address      = each.value.address
     }
-
-    /*
-    resource "nxos_ipv4_interface_address" "vlan400" {
-    vrf          = "VRF1"
-    interface_id = "vlan400"
-    address      = "10.100.11.1/24"
-    }
-    */
 
 
 #Create Vlan500
