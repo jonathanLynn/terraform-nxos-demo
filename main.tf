@@ -270,7 +270,7 @@ resource "nxos_ipv4_static_route" "StaticRoute-ForLoops" {
     interface_id = each.value.next_hop_interface
     address      = each.value.next_hop_address
     vrf_name     = each.value.next_hop_vrf
-    description  = each.value.description
+    #description  = each.value.description
     object       = each.value.object
     preference   = each.value.preference
     tag          = each.value.tag
