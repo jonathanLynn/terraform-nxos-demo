@@ -27,6 +27,7 @@ provider "nxos" {
     depends_on = [nxos_ipv4_vrf.VRF1]
     }
 
+/*
 #Interface Configuration
     resource "nxos_svi_interface" "vlan300" {
     interface_id = "vlan300"
@@ -37,13 +38,17 @@ provider "nxos" {
     medium       = "bcast"
     mtu          = 9216
     }
+*/
 
+/*
 #Interface to VRF Mapping
     resource "nxos_svi_interface_vrf" "vlan300" {
     interface_id = "vlan300"
     vrf_dn       = "sys/inst-VRF1"
     }
+*/
 
+/*
 #Interface IPv4 Configuration
     resource "nxos_ipv4_interface" "vlan300" {
     vrf          = "VRF1"
@@ -53,13 +58,16 @@ provider "nxos" {
     unnumbered   = "unspecified"
     urpf         = "disabled"
     }
+*/
 
+/*
     resource "nxos_ipv4_interface_address" "vlan300" {
     vrf          = "VRF1"
     interface_id = "vlan300"
     address      = "10.100.11.1/24"
     type         = "primary"
     }
+*/
 
 #Create Vlan500
     resource "nxos_bridge_domain" "VLAN500" {
